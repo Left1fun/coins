@@ -1,0 +1,22 @@
+* {
+    color: rgb(153, 255, 42);
+}
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: rgb(0, 27, 36);
+    color: rgb(153, 255, 42);
+}
+.coin-img {
+    width: 300px; /* Set the desired width */
+    height: auto; /* Maintain aspect ratio */
+}
+.block{
+    background-color: rgb(9, 39, 56);
+    padding: 1px;
+}
+

@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бросить Монетку</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(0, 27, 36);
+            color: rgb(153, 255, 42);
+        }
+        .header {
+            background-color: rgb(9, 39, 56);
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .block {
+            background-color: rgb(9, 39, 56);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 700px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .coins-wrapper {
+            width: 50%;
+            max-width: 300px;
+            height: 300px;
+            position: relative;
+        }
+        #mainCoin {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .small-coins {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .small-coin {
+            width: 100px;
+            height: auto;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+        .info {
+            width: 45%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        select {
+            padding: 5px;
+            margin-left: 10px;
+        }
+        input[type="button"] {
+            padding: 10px 20px;
+            background-color: rgb(153, 255, 42);
+            border: none;
+            border-radius: 5px;
+            color: rgb(9, 39, 56);
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        input[type="button"]:hover {
+            background-color: rgb(120, 255, 30);
+        }
+        h1 {
+            margin: 0;
+            margin-bottom: 10px;
+        }
+
+        /* Медиазапрос для мобильных устройств */
+        @media (max-width: 600px) {
+            .block {
+                flex-direction: column;
+                align-items: center;
+            }
+            .coins-wrapper {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            .info {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Бросить Монетку
+    </div>
+    <div class="block">
+        <div class="coins-wrapper">
+            <img src="Решка.png" alt="Монета" class="coin-img" id="mainCoin">
+            <script>
+                const mainCoin = document.querySelector('.coin-img')
+                mainCoin.src = Math.random() < 0.5 ? 'Орёл.png' : 'Решка.png'
+            </script>
+            <div class="small-coins" id="smallCoins"></div>
+        </div>
+        <div class="info">
+            <h1>Орел или Решка</h1>
+            <div>Попыток генерации: <strong id="gpp">1</strong></div>
+            <div class="label">
+                <label for="coinCount">Количество монет:</label>
+                <select id="coinCount">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div>
+                <input type="button" id="genr" value="Бросить монету">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateCoinsLayout(count) {
+            const mainCoin = document.getElementById('mainCoin');
+            const smallCoins = document.getElementById('smallCoins');
+            
+            smallCoins.innerHTML = '';
+            
+            if (count === 1) {
+                mainCoin.style.display = 'block';
+                mainCoin.style.width = '300px'; // Размер для одной монеты
+                smallCoins.style.display = 'none';
+            } else {
+                mainCoin.style.display = 'none';
+                smallCoins.style.display = 'block';
+                
+                // Устанавливаем базовый размер для монет
+                const baseSize = 100; // базовый размер монеты
+                const coinSize = Math.min(baseSize * (5 / count), 170); // Пропорциональный размер с ограничением
+
+                const positions = getPositions(count);
+                for (let i = 0; i < count; i++) {
+                    const coin = document.createElement('img');
+                    coin.src = 'Решка.png';
+                    coin.alt = 'Монета';
+                    coin.className = 'small-coin';
+                    coin.style.width = `${coinSize}px`; // Устанавливаем размер монеты
+                    coin.style.height = 'auto'; // Сохраняем пропорции
+                    coin.style.top = positions[i].top;
+                    coin.style.left = positions[i].left;
+                    coin.style.transform = 'translate(-50%, -50%)';
+                    smallCoins.appendChild(coin);
+                }
+            }
+        }
+
+        function getPositions(count) {
+            switch(count) {
+                case 2:
+                    return [
+                        { top: '50%', left: '20%' }, // Первая монета
+                        { top: '50%', left: '80%' }  // Вторая монета
+                    ];
+                case 3:
+                    return [
+                        { top: '20%', left: '50%' },
+                        { top: '80%', left: '20%' },
+                        { top: '80%', left: '80%' }
+                    ];
+                case 4:
+                    return [
+                        { top: '20%', left: '20%' },
+                        { top: '20%', left: '80%' },
+                        { top: '80%', left: '20%' },
+                        { top: '80%', left: '80%' }
+                    ];
+                case 5:
+                    return [
+                        { top: '50%', left: '50%' },
+                        { top: '20%', left: '20%' },
+                        { top: '20%', left: '80%' },
+                        { top: '80%', left: '20%' },
+                        { top: '80%', left: '80%' }
+                    ];
+                default:
+                    return [];
+            }
+        }
+
+        document.getElementById('coinCount').addEventListener('change', function() {
+            const count = parseInt(this.value);
+            updateCoinsLayout(count);
+            if (count === 1) {
+                document.getElementById('mainCoin').src = 'Решка.png';
+            } else {
+                document.querySelectorAll('.small-coin').forEach(coin => {
+                    coin.src = 'Решка.png';
+                });
+            }
+        });
+
+        document.getElementById('genr').addEventListener('click', function() {
+            const count = parseInt(document.getElementById('coinCount').value);
+            const attempts = document.getElementById('gpp');
+            attempts.textContent = parseInt(attempts.textContent) + 1;
+
+            // Отключаем кнопку
+            this.disabled = true;
+
+            const flipCount = Math.floor(Math.random() * 6) + 2; // Случайное число от 2 до 7
+            const mainCoin = document.getElementById('mainCoin');
+            let currentSide = mainCoin.src.includes('Орёл.png') ? 'Орёл.png' : 'Решка.png'; // Сохраняем текущее состояние
+
+            let flipsRemaining = flipCount; // Счётчик оставшихся переворотов
+
+            const flipInterval = setInterval(() => {
+                currentSide = currentSide === 'Орёл.png' ? 'Решка.png' : 'Орёл.png'; // Меняем сторону
+                if (count === 1) {
+                    mainCoin.src = currentSide;
+                } else {
+                    document.querySelectorAll('.small-coin').forEach(coin => {
+                        coin.src = currentSide;
+                    });
+                }
+                
+                flipsRemaining--; // Уменьшаем количество оставшихся переворотов
+
+                if (flipsRemaining === 0) {
+                    clearInterval(flipInterval);
+                    // Показываем окончательный результат, не меняя его
+                    if (count === 1) {
+                        mainCoin.src = Math.random() < 0.5 ? 'Орёл.png' : 'Решка.png';
+                    } else {
+                        document.querySelectorAll('.small-coin').forEach(coin => {
+                            coin.src = Math.random() < 0.5 ? 'Орёл.png' : 'Решка.png';
+                        });
+                    }
+                    // Включаем кнопку снова
+                    this.disabled = false;
+                }
+            }, 200); // Изменяем каждую 200 мс
+        });
+
+        // Инициализация при загрузке
+        updateCoinsLayout(1);
+    </script>
+</body>
+</html>
