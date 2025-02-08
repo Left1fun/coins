@@ -103,7 +103,7 @@ document.getElementById('genr').addEventListener('click', function () {
         let flipsRemaining = flipCount;
 
         // Генерируем случайную скорость для переворота (например, от 100 до 500 мс)
-        const randomSpeed = Math.floor(Math.random() * 400) + 100; // скорость от 100 до 500 мс
+        const randomSpeed = Math.floor(Math.random() * 300) + 50; // скорость от 100 до 500 мс
 
         const flipInterval = setInterval(() => {
             currentSide = currentSide === 'Орёл.png' ? 'Решка.png' : 'Орёл.png';
