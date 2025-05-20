@@ -1,15 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бросить Монетку</title>
     <link rel="stylesheet" href="style.css"/>
+    <link rel="icon" href="ава.png">
 </head>
 <body>
-    <div class="header">
-        Бросить Монетку
+<div class="header">
+    <div class="tabs">
+        <button class="tab-link active" data-tab="coinTab">Монетка</button>
+        <button class="tab-link" data-tab="numberGenTab">Генератор чисел</button>
+        <button class="tab-link" data-tab="wheelTab">Колесо Фортуны</button>
+        <button class="tab-link" data-tab="randomWordTab">Случайный выбор</button>
+
     </div>
+</div>
+<div id="coinTab" class="tab-content active">
     <div class="block">
         <div class="coins-wrapper">
             <img src="Решка.png" alt="Монета" class="coin-img" id="mainCoin">
@@ -37,7 +45,65 @@
             </div>
         </div>
     </div>
+</div>
+<div id="numberGenTab" class="tab-content">
+    <div class="block">
+        <div class="generator-container">
+            <h1>Генератор случайных чисел</h1>
+            <div class="input-group">
+                <label for="min">Минимум:</label>
+                <input type="number" id="min" value="1">
+            </div>
+            <div class="input-group">
+                <label for="max">Максимум:</label>
+                <input type="number" id="max" value="100">
+            </div>
+            <div>
+                <input type="button" id="generateBtn" value="Сгенерировать">
+            </div>
+            <div id="result" class="result-box"></div>
+        </div>
+    </div>
+</div>
+<div id="wheelTab" class="tab-content">
+    <div class="block">
+        <div class="wheel-container">
+            <h1>Колесо Фортуны</h1>
+            <div class="wheel-input">
+                <input type="text" id="wheelOption" placeholder="Введите вариант">
+                <button id="addOption">Добавить</button>
+            </div>
 
-    <script src="logic.js"></script>
+            <div class="options-list" id="optionsList"></div>
+            <div class="wheel-wrapper">
+                <div class="arrow"></div>
+                <canvas id="wheelCanvas" width="400" height="400"></canvas>
+            </div>
+            <div>
+                <input type="button" id="spinBtn" value="Крутить">
+            </div>
+            <div id="wheelResult" class="result-box"></div>
+        </div>
+    </div>
+</div>
+<div id="randomWordTab" class="tab-content">
+    <div class="block">
+        <div class="generator-container">
+            <h1>Генератор случайных вариантов</h1>
+            <div class="input-group">
+                <textarea
+                        id="wordsInput"
+                        placeholder="Введите варианты каждый с новой строки (например:&#10;Яблоко&#10;Груша&#10;Слива)"
+                        rows="4"
+                ></textarea>
+            </div>
+            <div>
+                <input type="button" id="generateRandomWord" value="Выбрать случайное">
+            </div>
+            <div id="wordResult" class="result-box"></div>
+        </div>
+    </div>
+</div>
+<script src="logic.js"></script>
 </body>
 </html>
