@@ -376,3 +376,162 @@ h1 {
     white-space: pre-wrap;
     line-height: 1.5;
 }
+/* Глобальные улучшения адаптивности */
+@media (max-width: 768px) {
+    /* Улучшения для верхнего меню */
+    .tabs {
+        gap: 6px;
+        padding: 8px 5px;
+    }
+
+    .tab-link {
+        padding: 8px 14px;
+        font-size: 15px;
+        border-radius: 15px;
+    }
+
+    /* Улучшения для основных блоков */
+    .block {
+        width: 90%;
+        margin: 15px auto;
+        padding: 15px;
+    }
+
+    /* Оптимизация для генератора чисел */
+    .input-group input {
+        width: 100%;
+        max-width: 120px;
+    }
+
+    /* Колесо фортуны */
+    .wheel-wrapper {
+        transform: scale(0.9);
+    }
+
+    /* Текстовые элементы */
+    h1 {
+        font-size: 1.6em;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Дополнительные улучшения для очень маленьких экранов */
+    .tab-link {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .block {
+        width: 95%;
+        padding: 12px;
+        margin: 10px auto;
+    }
+
+    /* Улучшения для поля ввода вариантов */
+    #wordsInput {
+        min-height: 80px;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    /* Кнопки действий */
+    input[type="button"] {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    /* Монеты в генераторе */
+    .coins-wrapper {
+        height: 250px;
+    }
+
+    .small-coin {
+        width: 80px;
+    }
+
+    /* Результаты */
+    .result-box {
+        font-size: 1.2em;
+        padding: 10px;
+        min-height: 45px;
+    }
+
+    /* Колесо фортуны */
+    #wheelCanvas {
+        width: 300px;
+        height: 300px;
+    }
+
+    .wheel-input {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #wheelOption {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 360px) {
+    /* Экстремальные случаи для очень маленьких устройств */
+    .tab-link {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    .block {
+        border-radius: 12px;
+    }
+
+    /* Монеты */
+    .coins-wrapper {
+        height: 200px;
+    }
+
+    /* Текст */
+    h1 {
+        font-size: 1.4em;
+    }
+
+    /* Кнопки */
+    #addOption {
+        font-size: 12px;
+        height: 32px;
+    }
+}
+
+/* Улучшения для элементов форм */
+input, select, textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Исправление проблем с горизонтальной прокруткой */
+body {
+    overflow-x: hidden;
+}
+
+/* Адаптивные изображения */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Улучшение отступов */
+@media (max-width: 768px) {
+    .generator-container, .wheel-container {
+        padding: 15px;
+    }
+
+    .input-group {
+        margin: 10px 0;
+    }
+}
+
+/* Адаптация текста */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+}
